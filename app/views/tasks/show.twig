@@ -1,0 +1,46 @@
+{% extends "base.twig" %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="jumbotron jumbotron-fluid">
+
+        <div class="container">
+
+        <form class="form" action="/task/update" method="POST">
+            <input type="hidden" value="{{ data.task.id }}" class="display-4" name="task_id"></h3>
+            <input type="text" value="{{ data.task.name }}" class="display-4" name="task_name"></h3>
+            <hr class="my-4">
+            <textarea class="lead form-control mb-3" name="task_content"> {{ data.task.content }} </textarea>
+
+
+            <div class="form-group">
+                <select id="users" class="form-control-inline col-md-3 mr-3" name="user_id">Select User
+                    {% for user in data.users %}
+                        <option value="{{ user.id }}" {% if data.task.user_id == user.id %} selected="selected" {% endif %}>{{ user.name }}</option>
+                    {% endfor %}
+                </select>
+                
+                <select id="clients" class="form-control-inline col-md-3" name="client_id">Select Client
+                    {% for client in data.clients %}
+                        <option value="{{ client.id }}" {% if data.task.client_id == client.id %} selected="selected" {% endif %}>{{ client.name }}</option>
+                    {% endfor %}    
+                </select>
+
+                <div class="form-group m-0 p-0"> 
+                    {% for tag in data.tags %}
+                        <input type="checkbox" class="m-2" value="{{ tag.id }}" {% if tag.id == client.id %} checked="checked" {% endif %} name="tag_ids[]">{{ tag.name }}</option>
+                    {% endfor %}    
+                </div>
+            </div>
+
+            <button class="btn btn-primary mt-3">Save</button>
+            
+        </form>  
+    </div>
+</div>
+
+
+{% endblock %}

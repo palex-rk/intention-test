@@ -1,0 +1,46 @@
+{% extends "base.twig" %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block body %}
+
+<div class="container mt-3">
+
+    <form class="form my-2 my-lg-0 pb-3" method="POST" action="/task/save">
+
+        <div class="form-group">
+            <label for="task_name">Task name</label>
+            <input type="text" class="form-control" id="task_name" name="task_name" placeholder="Enter task name">
+        </div>
+
+        <div class="form-group">
+            <label for="task_content">Task content</label>
+            <textarea class="form-control" id="task_content" name="task_content" placeholder="Enter task content" rows="3"></textarea>
+        </div> 
+
+        <select id="users" name="user_id">  
+            {% for user in data.users %}
+                <option value="{{ user.id }}" name="user_id[]">{{ user.name }}</option>
+            {% endfor %}    
+        </select>
+
+        <select id="clients" name="client_id">  
+            {% for client in data.clients %}
+                <option class="form-control" value="{{ client.id }}" name="user_id[]">{{ client.name }}</option>
+            {% endfor %}    
+        </select>
+
+        <div> 
+            {% for tag in data.tags %}
+                <input type="checkbox" class="m-3" value="{{ tag.id }}" name="tag_ids[]">{{ tag.name }}</option>
+            {% endfor %}    
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary mt-3" type="submit">Submit</button>
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}

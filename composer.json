@@ -1,0 +1,19 @@
+{
+    "name": "palex-rk/intension-test",
+    "description": "test",
+    "authors": [
+        {
+            "name": "Aleksandar Pavlovic",
+            "email": "aleksandar84pavlovic@yahoo.com"
+        }
+    ],
+    "autoload": {
+        "psr-4" : {
+            "Src\\" : "src/",
+            "App\\" : "app/"
+        }
+    },
+    "require": {
+        "twig/twig": "3.0"
+    }
+}

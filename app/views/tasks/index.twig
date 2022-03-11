@@ -1,0 +1,46 @@
+{% extends "base.twig" %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block body %}
+
+<div class="alert alert-{{ _get.message_type }}"> {{ _get.message }}</div>
+    <h3 class="h3 d-flex justify-content-center m-2">TASKS LIST</h3>
+
+    <div class="container">
+
+        <form class="form-inline my-2 my-lg-0 pb-3" method="POST" action="/task/search">
+     
+            <button class="btn btn-outline-success my-2 my-sm-0 ml-3" type="submit">Search</button>
+            <a href="index" class="btn btn-outline-info my-2 my-sm-0 ml-2">Reset </a> 
+            <a href="/task/create" class="btn btn-outline-info my-2 my-sm-0 ml-2">New task </a>
+
+            <table class="table table-striped table-dark m-3">
+                <thead>
+                    <th scope="col">TASK ID</th>
+                    <th scope="col">TASK TITLE</th>
+                    <th scope="col">USER</th>
+                    <th scope="col">CLIENT</th>
+                    <th scope="col">TAGS</th>
+                </thead>
+                <tbody>
+                    {% for task in tasks %}
+                        <tr>
+                            <td>{{ task.task_id }}</a></td>
+                            <td><a href="/task/show/{{ task.task_id }}" >{{ task.task_name }} </a></td>
+                            <td>{{ task.user_name }} <input type="checkbox" class="form-check-input" name="user_id[]" value="{{ task.user_id }}"></td>
+                            <td>{{ task.client_name }} <input type="checkbox" class="form-check-input" name="client_id[]" value="{{ task.client_id }}"></td>
+                            <td>
+                                {% for tag in task.tags %}
+                                    {{ tag.tag_name }}
+                                    {% if tag.tag_name %}<input type="checkbox" class="form-check-input" name="tag_id[]" value="{{ tag.tag_id }}">{% endif %}
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endfor %}    
+                </tbody> 
+            </table>
+        </form>
+    </div>
+
+{% endblock %}
